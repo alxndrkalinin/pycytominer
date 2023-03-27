@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.distutils.bdist_wheel]
+universal = true
+
+[project]
+name = "pycytominer"
+authors = [
+    {name = "Gregory Way", email = "gregory.way@gmail.com"},
+]
+description = "Processing perturbation profiling readouts."
+urls = {repository = "https://github.com/cytomining/pycytominer"}
+requires-python = ">=3.4"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: BSD License"
+]
+dynamic = ["dependencies", "version", "readme"]
+
+[project.optional-dependencies]
+collate = ["cytominer-database==0.3.4"]
+
+[tool.setuptools.packages.find]
+namespaces = false
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}
+version = {attr = "pycytominer.__version__"}
+readme = {file = "README.rmd", format = "markdown"}
