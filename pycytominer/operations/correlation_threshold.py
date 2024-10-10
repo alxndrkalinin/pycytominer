@@ -50,7 +50,7 @@ def correlation_threshold(
     if samples != "all":
         population_df.query(samples, inplace=True)
 
-    if features == "infer":
+    if isinstance(features, str) and features == "infer":
         features = infer_cp_features(population_df)
 
     population_df = population_df.loc[:, features]

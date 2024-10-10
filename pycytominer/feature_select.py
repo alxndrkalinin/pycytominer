@@ -126,8 +126,10 @@ def feature_select(
     # Load Data
     profiles = load_profiles(profiles)
 
-    if features == "infer":
+    if isinstance(features, str) and features == "infer":
         features = infer_cp_features(profiles, image_features=image_features)
+    elif not all(feature in profiles.columns for feature in features):
+        raise ValueError("Features not found among columns of profiles.")
 
     excluded_features = []
     for op in operation:
