@@ -25,7 +25,7 @@ env:
   PRE_COMMIT_HOME: ${{ github.workspace }}/.cache/pre-commit
   PYTEST_ADDOPTS: ${{ github.event.inputs.pytest_addopts }}
   PYTHONIOENCODING: "UTF-8"
-  TARGET_PYTHON_VERSION: "3.9"
+  TARGET_PYTHON_VERSION: "3.10"
 
 jobs:
   quality-test:
@@ -56,6 +56,9 @@ jobs:
         uses: pre-commit/action@v3.0.1
         with:
           extra_args: --all-files
+      # run pre-commit ci lite for automated fixes
+      - uses: pre-commit-ci/lite-action@v1.1.0
+        if: ${{ !cancelled() }}
   python-type-checks:
     # This job is used to check Python types
     name: Python type checks
